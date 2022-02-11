@@ -1,0 +1,80 @@
+all:
+  children:
+    ansible_hosts:
+      hosts:
+        node1:
+          ansible_host: 192.168.1.53
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.211
+      vars:
+        name: ans
+    controller_hosts:
+      hosts:
+        node2:
+          ansible_host: 192.168.1.53
+          vm_vars:
+            cpu: 2
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.212
+      vars:
+        name: cont
+
+    compute_hosts:
+      hosts:
+        node3:
+          ansible_host: 192.168.1.52
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.213
+        node4:
+          ansible_host: 192.168.1.54
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.214
+        node5:
+          ansible_host: 192.168.1.55
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.218
+
+      vars:
+        name: comp
+    storage_hosts:
+      hosts:
+        node6:
+          ansible_host: 192.168.1.52
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.219
+        node7:
+          ansible_host: 192.168.1.54
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.213
+        node8:
+          ansible_host: 192.168.1.55
+          vm_vars:
+            cpu: 1
+            ram: 2048
+            hdd: 100
+            ip: 192.168.1.220
+         
+      vars:
+        name: str
+  vars:
+    fileserver: 192.168.1.54
+    filepath: /home/himanshu/Ubuntu20-Cli-Img.qcow2
