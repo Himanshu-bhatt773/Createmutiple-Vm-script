@@ -1,0 +1,13 @@
+---
+  - name: Delete_Generic_VMs
+    hosts: all
+    become: yes
+    become_user: root
+
+    tasks:
+    - name: Delete GEneric VMs on all  Hypervisor
+      command: "{{item}}"
+      with_items:    
+       - virsh destroy {{ name }}-{{ vm_vars['ip'] }}
+       - sleep 5  
+       - virsh undefine {{ name }}-{{ vm_vars['ip'] }} --remove-all-storage
