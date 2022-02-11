@@ -1,0 +1,14 @@
+---
+  - name: Create_Generic_VMs
+    hosts: all
+    become: yes
+    become_user: root
+
+    tasks:
+    - name: Create GEneric VMs on Hypervisor
+      command: "{{item}}"
+      with_items:    
+       - sshpass -p "ubuntu" scp -o StrictHostKeyChecking=no root@{{ fileserver }}:{{ filepath }} /root/
+       - sleep 2 
+       - cp /root/Ubuntu20-Cli-Img.qcow2 /var/lib/libvirt/images/{{ name }}-{{ vm_vars['ip'] }}.qcow2 
+       - virt-install -n {{ name }}-{{ vm_vars['ip'] }} -r {{ vm_vars['ram'] }}  --vcpus={{ vm_vars['cpu'] }} --os-type=Linux --os-variant=ubuntu20.04 --graphics=none --console pty,target_type=serial --network=bridge:br-mgmt,model=virtio --import --disk /var/lib/libvirt/images/{{ name }}-{{ vm_vars['ip'] }}.qcow2 --noautoconsole -v
